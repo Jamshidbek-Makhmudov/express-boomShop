@@ -1,4 +1,4 @@
-<header class="p-3 text-bg-dark">
+<header class="p-3 text-bg-dark ">
     <div class="container">
       <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
         <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
@@ -6,11 +6,31 @@
         </a>
 
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+          {{#if isMain}}
           <li><a href="/" class="nav-link px-2 text-secondary">Home</a></li>
+          {{else}}
+          <li><a href="/" class="nav-link px-2 text-white">Home</a></li>
+          {{/if}}
+          {{#if isProducts}}
+          <li><a href="/products" class="nav-link px-2 text-secondary ">Products</a></li>
+          {{else}}
           <li><a href="/products" class="nav-link px-2 text-white ">Products</a></li>
+          {{/if}}
+          {{#if isAdd}}
+          <li><a href="/add" class="nav-link px-2 text-secondary">Add</a></li>
+          {{else}}
           <li><a href="/add" class="nav-link px-2 text-white">Add</a></li>
+          {{/if}}
+          
+
+      
           <li><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
+
+          {{#if isAbout}}
+          <li><a href="about" class="nav-link px-2 text-secondary">About</a></li>
+          {{else}}
           <li><a href="about" class="nav-link px-2 text-white">About</a></li>
+          {{/if}}
         </ul>
 
         <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
@@ -18,8 +38,16 @@
         </form>
 
         <div class="text-end">
+          {{#if isLogin}}
+          <button type="button" class="btn btn-outline-light me-2 active "><a class="text-decoration-none" href="/login"> Login</a></button>
+          {{else}}
           <button type="button" class="btn btn-outline-light me-2 "><a class="text-decoration-none" href="/login"> Login</a></button>
+          {{/if}}
+          {{#if isRegister}}
+          <button type="button" class="btn btn-warning active"> <a class="text-decoration-none"   href="/register"> Sign-up</a></button>
+          {{else}}
           <button type="button" class="btn btn-warning"> <a class="text-decoration-none"   href="/register"> Sign-up</a></button>
+          {{/if}}
         </div>
       </div> 
     </div>
