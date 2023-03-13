@@ -1,8 +1,18 @@
 //middlwware bu loyiha ishlashidan oldin ishlaydigan function bu; bu modullar kopayib ketganda ularni handle qilish uchun kerak
-import AuthRoutes from "./routes/auth.js"
-import ProductsRoutes from "./routes/products.js"
+//nodejs va express bn ishlaganda malumotlarni malumotlar bazasida saqlashimiz kerak boladi;
+//malumorlat bazasi -data base ya'ni mongoDb deyiladi; unga sign in qilin nodejs bn mongoDb ni mongoose orqali boglaymiz
+//buni npm install mongoose qilamiz yoki qanday connect qilish kerak deb googlega yozsak chiqarib beradi
 import express from "express"
 import { create } from "express-handlebars" //
+import mongoose from "mongoose" //mongoose ulandi
+import * as dotenv from "dotenv" // dotenv ni npm install qilgandan song shu ham ovolish kerak; dotenv.config() ham kerak
+//routes
+import AuthRoutes from "./routes/auth.js"
+import ProductsRoutes from "./routes/products.js"
+
+//
+dotenv.config()
+//
 const app = express() //expressni bita varuablega ovolish kerak
 //filename bn dirname ni qolda ysab oldik
 //
@@ -15,17 +25,67 @@ app.engine("hbs", hbs.engine)
 app.set("view engine", "hbs")
 app.set("views", "./views")
 
+// mongoose.set("strictQuery", false)
+
 //
-app.use(express.urlencoded({ extended: true }))
 //
 //bu yerda esa middlewarelar yani modulelar kopayib ketganda ularni route papka ochib use orqali ularni osha joyga kochirib qoysak boladi
+
+//mongoDb bn ishlashda shuni yozish kerak ya'ni mongoDB bn faqat json fayl orqali ishlanadi
+
+//publicdagi fayllarni static qili qoyadi keyin hamma joyda ishlatsa boladi
+app.use(express.static("public"))
+app.use(express.urlencoded({ extended: true }))
+app.use(express.json())
+
 app.use(AuthRoutes)
 app.use(ProductsRoutes)
 
-//publicdagi fayllarni static qili qoyadi keyin hamma joyda ishlatsa boladi
-app.use(express.static("puplic"))
-const PORT = process.env.PORT || 4100 //terminal da portni ozi tanlash yoki 4100 degani
-app.listen(PORT, () => {
-  //listen methodi qaysi portda ishlashini korsatib beradi
-  console.log(`server is running on ${PORT}  local host!`)
-})
+const startApp = () => {
+  try {
+    mongoose.set("strictQuery", false)
+    mongoose
+      .connect(process.env.MONGO_URI, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+      })
+      .then(() => {
+        console.log("MongoDB connected!")
+      })
+      .catch((error) => {
+        console.log("MongoDB connection error:", error)
+      })
+    //shu kod errorni qanday errorligini korsatib berdi
+    process.on("uncaughtException", function (err) {
+      console.log(err)
+    })
+
+    const PORT = process.env.PORT || 4100
+    app.listen(PORT, () => console.log(`Server is running on port: ${PORT}`))
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+startApp()
+
+// mongoose.connect(
+//   process.env.MONGO_URI,
+//   {
+//     useNewUrlParser: true,
+//     useFindAndModify: false,
+//     useUnifiedTopology: true,
+//   },
+//   () => {
+//     console.log("mongoDb connected")
+//   }
+// )
+
+// const PORT = process.env.PORT || 4100 //terminal da portni ozi tanlash yoki 4100 degani
+
+// app.listen(PORT, () => {
+//   //listen methodi qaysi portda ishlashini korsatib beradi
+//   console.log(`server is running on ${PORT}  local host!`)
+// })
+
+// //mongodb+srv://Jamshidbek:<password>@cluster0.eujzar6.mongodb.net/?retryWrites=true&w=majority
