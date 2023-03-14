@@ -3,7 +3,17 @@
 
 
    
+     <div class="d-flex align-items-center ">
     <h1 class="h3 mb-3 fw-normal">Please sign up</h1>
+
+ 
+    {{#if registerError}}
+    <div class="ps-3 alert alert-danger alert-dismissible fade show" role="alert">
+{{registerError}}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+    {{/if}}
+   </div>
 
     <div class="form-floating ">
       <input type="text" name="firstname" class="form-control" id="floatingInput" placeholder="Jamshid">
@@ -28,7 +38,7 @@
       </label>
     </div>
 
-    <button class="w-25 btn btn-lg btn-primary " type="submit">Sign up</button>
+    <button class=" btn btn-lg btn-primary " type="submit">Sign up</button>
 
 
   </form>

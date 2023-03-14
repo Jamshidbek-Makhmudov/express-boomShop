@@ -3,6 +3,13 @@
 //malumorlat bazasi -data base ya'ni mongoDb deyiladi; unga sign in qilin nodejs bn mongoDb ni mongoose orqali boglaymiz
 //buni npm install mongoose qilamiz yoki qanday connect qilish kerak deb googlega yozsak chiqarib beradi
 import express from "express"
+//
+//express uchun middleware package- sign-in/sign-up qilganda userga har xil validation errorlarni korsatish uchun kerak
+import flash from "connect-flash"
+//session
+//bu javascriptda loacl storage vazifasini bajaradi lekin farqi qanchadir tuib keyin ochib ketadi
+//flash bn birga yuklab olinishi kerak ular birga ishlaydi
+import session from "express-session"
 import { create } from "express-handlebars" //
 import mongoose from "mongoose" //mongoose ulandi
 import * as dotenv from "dotenv" // dotenv ni npm install qilgandan song shu ham ovolish kerak; dotenv.config() ham kerak
@@ -28,15 +35,17 @@ app.set("views", "./views")
 // mongoose.set("strictQuery", false)
 
 //
-//
+//middleware
 //bu yerda esa middlewarelar yani modulelar kopayib ketganda ularni route papka ochib use orqali ularni osha joyga kochirib qoysak boladi
-
 //mongoDb bn ishlashda shuni yozish kerak ya'ni mongoDB bn faqat json fayl orqali ishlanadi
-
 //publicdagi fayllarni static qili qoyadi keyin hamma joyda ishlatsa boladi
 app.use(express.static("public"))
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
+
+//validation middleware flash; sessionlar bn ishlaydi, qanchadir vaqt turib keyin ochib ketadi; maxAge- bu qancha vaqt turishi
+app.use(session({ secret: "jamshid", resave: false, saveUninitialized: false }))
+app.use(flash())
 
 app.use(AuthRoutes)
 app.use(ProductsRoutes)
