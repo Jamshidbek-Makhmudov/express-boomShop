@@ -8,6 +8,10 @@ import { generateJWTToken } from "../services/token.js"
 const router = Router()
 
 router.get("/login", (req, res) => {
+  if (req.cookies.token) {
+    res.redirect("/about")
+    return
+  }
   res.render("login", {
     title: "login",
     isLogin: true,
@@ -16,8 +20,16 @@ router.get("/login", (req, res) => {
   //keyin uni hbs head da tutib olib titleni qoyib qoysak boladi
   //isLogin ni ham true qilib uni props qilib jonatib navbar.hbs tutib olib if else orqali true bolsa active qil yoki qilma deb qoysak boladi
 })
+router.get("/logout", (req, res) => {
+  res.clearCookie("token")
+  res.redirect("/login")
+})
 
 router.get("/register", (req, res) => {
+  if (req.cookies.token) {
+    res.redirect("/about")
+    return
+  }
   res.render("register", {
     title: "Sign-up",
     isRegister: true,

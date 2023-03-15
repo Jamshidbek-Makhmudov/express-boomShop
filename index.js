@@ -10,12 +10,15 @@ import flash from "connect-flash"
 //bu javascriptda loacl storage vazifasini bajaradi lekin farqi qanchadir tuib keyin ochib ketadi
 //flash bn birga yuklab olinishi kerak ular birga ishlaydi
 import session from "express-session"
+//cookiedagi tokenlarni olish uchun bu package, u ham middleware
+import cookieParser from "cookie-parser"
 import { create } from "express-handlebars" //
 import mongoose from "mongoose" //mongoose ulandi
 import * as dotenv from "dotenv" // dotenv ni npm install qilgandan song shu ham ovolish kerak; dotenv.config() ham kerak
 //routes
 import AuthRoutes from "./routes/auth.js"
 import ProductsRoutes from "./routes/products.js"
+import varMiddleware from "./middleware/var.js"
 
 //
 dotenv.config()
@@ -36,16 +39,25 @@ app.set("views", "./views")
 
 //
 //middleware
+//middlewarelar bizga extra function qoshib beradi
 //bu yerda esa middlewarelar yani modulelar kopayib ketganda ularni route papka ochib use orqali ularni osha joyga kochirib qoysak boladi
 //mongoDb bn ishlashda shuni yozish kerak ya'ni mongoDB bn faqat json fayl orqali ishlanadi
 //publicdagi fayllarni static qili qoyadi keyin hamma joyda ishlatsa boladi
 app.use(express.static("public"))
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
+app.use(cookieParser())
 
 //validation middleware flash; sessionlar bn ishlaydi, qanchadir vaqt turib keyin ochib ketadi; maxAge- bu qancha vaqt turishi
 app.use(session({ secret: "jamshid", resave: false, saveUninitialized: false }))
 app.use(flash())
+
+//bu bizni shaxsiy global middlewarrimiz uni qanday yasadik va mega kerak?
+//user login qilgandan song navbarda login va sign-upni orniga logout paydo bolishi kerak edi token true bolganda
+//lekin tokenni 1ta joyda bersak faqat osha joyda ishlavotti
+//shunda biz shu shu middleware functionni yozdik, unda   res.locals.token = true va  next() parametrlarini ishlatdik
+//shunda token global bolib qoldi
+app.use(varMiddleware)
 
 app.use(AuthRoutes)
 app.use(ProductsRoutes)
