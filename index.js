@@ -2,6 +2,7 @@
 //nodejs va express bn ishlaganda malumotlarni malumotlar bazasida saqlashimiz kerak boladi;
 //malumorlat bazasi -data base ya'ni mongoDb deyiladi; unga sign in qilin nodejs bn mongoDb ni mongoose orqali boglaymiz
 //buni npm install mongoose qilamiz yoki qanday connect qilish kerak deb googlega yozsak chiqarib beradi
+
 import express from "express"
 //
 //express uchun middleware package- sign-in/sign-up qilganda userga har xil validation errorlarni korsatish uchun kerak
