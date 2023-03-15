@@ -12,3 +12,11 @@
   max-width: 200px;
   height: 50px;
 }
+.sm{
+  height: 40px;
+  width: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+ 
+}

@@ -1,1 +1,42 @@
-    <h1>ABOUT PAGE</h1>
+{{#if products.length}}
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 mt-3">
+
+    {{#each products}}
+
+      <div class="col">
+        <div class="card shadow-sm">
+          <img src="{{image}}" alt="" />
+          <div class="card-body">
+            <p class="card-text fw-bold">{{title}}</p>
+            <div class="d-flex justify-content-end align-items-center">
+
+              <small class="text-muted fs-5 text-end">{{price}} $</small>
+              {{user}}
+            </div>
+          </div>
+          {{#if @root.token}}
+          {{!-- root bu golbal sorov  token var.jsdagi token bolib bi kodni manosi shu token bolsa, user login bolgan boladi --}}
+          
+          {{else}}
+          {{/if}}
+          <div class="card-footer">
+            <div
+              class="btn-group btn-goup-sm"
+              role="group"
+              aria-label="Basic mixed styles example"
+            >
+              <button type="button" class="btn btn-success sm">Details</button>
+              <button type="button" class="btn btn-warning sm">Edit</button>
+              <button type="button" class="btn btn-danger sm">Delete</button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    {{/each}}
+  </div>
+
+{{else}}
+  <p>no</p>
+{{/if}}

@@ -20,6 +20,7 @@ import * as dotenv from "dotenv" // dotenv ni npm install qilgandan song shu ham
 import AuthRoutes from "./routes/auth.js"
 import ProductsRoutes from "./routes/products.js"
 import varMiddleware from "./middleware/var.js"
+import userMiddleware from "./middleware/user.js"
 
 //
 dotenv.config()
@@ -59,6 +60,7 @@ app.use(flash())
 //shunda biz shu shu middleware functionni yozdik, unda   res.locals.token = true va  next() parametrlarini ishlatdik
 //shunda token global bolib qoldi
 app.use(varMiddleware)
+app.use(userMiddleware)
 
 app.use(AuthRoutes)
 app.use(ProductsRoutes)
@@ -90,24 +92,3 @@ const startApp = () => {
 }
 
 startApp()
-
-// mongoose.connect(
-//   process.env.MONGO_URI,
-//   {
-//     useNewUrlParser: true,
-//     useFindAndModify: false,
-//     useUnifiedTopology: true,
-//   },
-//   () => {
-//     console.log("mongoDb connected")
-//   }
-// )
-
-// const PORT = process.env.PORT || 4100 //terminal da portni ozi tanlash yoki 4100 degani
-
-// app.listen(PORT, () => {
-//   //listen methodi qaysi portda ishlashini korsatib beradi
-//   console.log(`server is running on ${PORT}  local host!`)
-// })
-
-// //mongodb+srv://Jamshidbek:<password>@cluster0.eujzar6.mongodb.net/?retryWrites=true&w=majority

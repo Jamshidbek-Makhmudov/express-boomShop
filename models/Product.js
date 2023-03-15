@@ -11,7 +11,7 @@ const ProductSchema = new Schema(
     description: { type: String, required: true },
     image: { type: String, requried: true },
     price: { type: Number, required: true },
-    //  user: { type: Schema.Types.ObjectId, ref: "User" },
+    user: { type: Schema.Types.ObjectId, ref: "User" },
   },
   { timestamps: true } // bu optional bolib, update bolgan qismini chiqarib beradi
 )
