@@ -21,6 +21,8 @@ import AuthRoutes from "./routes/auth.js"
 import ProductsRoutes from "./routes/products.js"
 import varMiddleware from "./middleware/var.js"
 import userMiddleware from "./middleware/user.js"
+//
+import hbsHelper from "./utils/index.js"
 
 //
 dotenv.config()
@@ -30,12 +32,16 @@ const app = express() //expressni bita varuablega ovolish kerak
 //
 //handlebarda createni tortib olamiz va hbs varuableiga tenglab olamiz bu
 //bizga module nomlarini handlebras deb yozishni oldini oladi
-const hbs = create({ defaultLayout: "main", extname: "hbs" })
+const hbs = create({
+  defaultLayout: "main",
+  extname: "hbs",
+  helpers: hbsHelper,
+})
 
 // express handlebarsni yuklab olish
 app.engine("hbs", hbs.engine)
 app.set("view engine", "hbs")
-app.set("views", "./views")
+app.set("views")
 
 // mongoose.set("strictQuery", false)
 

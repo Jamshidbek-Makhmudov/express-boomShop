@@ -11,14 +11,9 @@
             <div class="d-flex justify-content-end align-items-center">
 
               <small class="text-muted fs-5 text-end">{{price}} $</small>
-              {{user}}
+            
             </div>
           </div>
-          {{#if @root.token}}
-          {{!-- root bu golbal sorov  token var.jsdagi token bolib bi kodni manosi shu token bolsa, user login bolgan boladi --}}
-          
-          {{else}}
-          {{/if}}
           <div class="card-footer">
             <div
               class="btn-group btn-goup-sm"
@@ -26,8 +21,18 @@
               aria-label="Basic mixed styles example"
             >
               <button type="button" class="btn btn-success sm">Details</button>
+          {{#if @root.token}}
+          
+          {{#ifequal user @root.userId}} 
+          {{!-- ifequlani biz utils degan papakaga if equal degan function yozib shuni chiqarvoldik,
+          agar 2ta condition teng bolsa 1ta ishni bomasa 2chi ishni bajardi; user productsdan kelgan user- userId esa
+          root dan keldi --}}
+          {{!-- root bu golbal sorov  token var.jsdagi token bolib bi kodni manosi shu token bolsa, user login bolgan boladi --}}
               <button type="button" class="btn btn-warning sm">Edit</button>
               <button type="button" class="btn btn-danger sm">Delete</button>
+          {{/ifequal}}
+          
+          {{/if}}
             </div>
 
           </div>
