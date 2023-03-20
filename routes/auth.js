@@ -93,7 +93,6 @@ router.post("/register", async (req, res) => {
   //bcryptni sign-up qilishda ishlatish
   const hashedPassword = await bcrypt.hash(password, 10)
 
-  // console.log(req.body)
   const userData = {
     firstName: firstname,
     lastName: lastname,

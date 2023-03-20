@@ -1,3 +1,27 @@
+<div class='marketing'>
+	<div class='row featurette'>
+		<div class='col-md-7 mt-10rem'>
+			<h2 class='featurette-heading fw-normal lh-1'>First featurette heading.
+				<span class='text-muted'>It’ll blow your mind.</span></h2>
+			<p class='lead'>Some great placeholder content for the first featurette here. Imagine some exciting prose here.</p>
+		</div>
+		<div class='col-md-5'>
+			<img src='/pic1.png' width='100%' />
+		</div>
+	</div>
+</div>
+<hr class='featurette-divider' />
+<div class='row featurette'>
+	<div class='col-md-7 order-md-2 mt-10rem'>
+		<h2 class='featurette-heading fw-normal lh-1'>Oh yeah, it’s that good. <span class='text-muted'>See for yourself.</span></h2>
+		<p class='lead'>Another featurette? Of course. More placeholder content here to give you an idea of how this layout would work
+			with some actual real-world content in place.</p>
+	</div>
+	<div class='col-md-5 order-md-1'>
+		<img src='/pic2.png' width='100%' />
+	</div>
+</div>
+<hr class='featurette-divider' />
 {{#if products.length}}
   <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 mt-3">
 
@@ -22,7 +46,7 @@
               role="group"
               aria-label="Basic mixed styles example"
             >
-              <button type="button" class="btn btn-success sm">Details</button>
+              <a  href='/product/{{_id}}' type="button" class="btn btn-success sm">Details</a>
           {{#if @root.token}}
           
           {{#ifequal user @root.userId}} 
@@ -30,8 +54,10 @@
           agar 2ta condition teng bolsa 1ta ishni bomasa 2chi ishni bajardi; user productsdan kelgan user- userId esa
           root dan keldi --}}
           {{!-- root bu golbal sorov  token var.jsdagi token bolib bi kodni manosi shu token bolsa, user login bolgan boladi --}}
-              <button type="button" class="btn btn-warning sm">Edit</button>
-              <button type="button" class="btn btn-danger sm">Delete</button>
+              <a href="edit-product/{{_id}}" type="button" class="btn btn-warning sm">Edit</a>
+              <form action="/delete-product/{{_id}}" method="post">
+              <button type="submit" class="btn btn-danger sm">Delete</button>
+              </form>
           {{/ifequal}}
           
           {{/if}}
@@ -45,5 +71,19 @@
   </div>
 
 {{else}}
-  <p>no</p>
+<section class='page_404 w-75 mx-auto'>
+		<div class='row'>
+			<div class='col-sm-12'>
+				<div class='col-sm-10 col-sm-offset-1 text-center'>
+					<div class='four_zero_four_bg'>
+						<h1 class='text-center'>404</h1>
+					</div>
+					<div class='contant_box_404'>
+						<h3 class='h2'>Add new products</h3>
+						<a href='/add' class='btn btn-primary btn-lg mb-5'>Add products</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 {{/if}}

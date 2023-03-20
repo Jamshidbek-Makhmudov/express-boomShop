@@ -12,8 +12,8 @@
   "author": "Jamshid Makhmudov ",
   "license": "ISC",
   "dependencies": {
+    "@handlebars/allow-prototype-access": "^1.0.5",
     "bcrypt": "^5.1.0",
-    "bootstrap-icons": "^1.10.3",
     "connect-flash": "^0.1.1",
     "cookie-parser": "^1.4.6",
     "dotenv": "^16.0.3",
