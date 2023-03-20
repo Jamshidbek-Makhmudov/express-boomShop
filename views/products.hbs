@@ -1,1 +1,38 @@
-<h1>products</h1>
+{{#if myProducts.length}}
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 mt-3">
+
+    {{#each myProducts}}
+
+      <div class="col">
+        <div class="card shadow-sm">
+          <img src="{{image}}" alt="" />
+          <div class="card-body">
+            <p class="card-text fw-bold">{{title}}</p>
+            <p class="card-text ">{{description}}</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="d-flex gap-3 align-items-center">
+
+              <div class="avatar bg-dark">
+                
+              <p>{{getFirstLetter  user.firstName user.lastName}}</p>
+              {{!-- <p>{{}}</p> --}}
+          {{!-- <img class="avatar" src="{{image}}" alt="" /> --}}
+             
+              </div>
+          <small>{{user.firstName}} {{user.lastName}}</small>
+              </div>
+
+              <small class="text-muted fs-5 text-end">{{price}} $</small>
+            
+            </div>
+          </div>
+   
+        </div>  
+      </div>
+
+    {{/each}}
+  </div>
+
+{{else}}
+  <p>no</p>
+{{/if}}

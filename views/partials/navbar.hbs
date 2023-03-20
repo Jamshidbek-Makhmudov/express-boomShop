@@ -24,6 +24,14 @@
         {{else}}
           <li><a href="/" class="nav-link px-2 text-white">Home</a></li>
         {{/if}}
+            {{#if isAbout}}
+          <li><a
+              href="all products"
+              class="nav-link px-2 text-secondary"
+            >All Products</a></li>
+        {{else}}
+          <li><a href="about" class="nav-link px-2 text-white"> All Products</a></li>
+        {{/if}}
         {{#if isProducts}}
           <li><a
               href="/products"
@@ -33,24 +41,17 @@
           <li><a
               href="/products"
               class="nav-link px-2 text-white"
-            >Products</a></li>
+            >My Products</a></li>
         {{/if}}
         {{#if isAdd}}
-          <li><a href="/add" class="nav-link px-2 text-secondary">Add</a></li>
+          <li><a href="/add" class="nav-link px-2 text-secondary">Add Product</a></li>
         {{else}}
-          <li><a href="/add" class="nav-link px-2 text-white">Add</a></li>
+          <li><a href="/add" class="nav-link px-2 text-white">Add Product</a></li>
         {{/if}}
 
         <li><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
 
-        {{#if isAbout}}
-          <li><a
-              href="about"
-              class="nav-link px-2 text-secondary"
-            >About</a></li>
-        {{else}}
-          <li><a href="about" class="nav-link px-2 text-white">About</a></li>
-        {{/if}}
+    
       </ul>
 
       {{#if token}}

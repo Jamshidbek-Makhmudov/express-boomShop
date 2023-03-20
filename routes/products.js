@@ -24,8 +24,19 @@ router.get("/about", async (req, res) => {
     userId: req.userId ? req.userId.toString() : null,
   })
 })
-router.get("/products", (req, res) => {
-  res.render("products", { title: "products", isProducts: true })
+router.get("/products", async (req, res) => {
+  const user = req.userId ? req.userId.toString() : null
+  const myProducts = await Product.find({ user: user }).populate("user").lean()
+  console.log(myProducts)
+  //populate methodi mongoDB dagi user object korinishida boganiuchun uni ichidan ozimizni firstname bn lastnameni
+  // ovolish uchun kerak bu populate togri ishlashi uchun Product modulids ref:"user bolishi kerak"
+
+  res.render("products", {
+    title: "products",
+    isProducts: true,
+    myProducts: myProducts, //bu UI da korinishi uchun props qilib jonatib yuboramiz
+  })
+  //bu bizga userimiz create qilgan productlarnigina alohida pageda chiqarish uchun kerak
 })
 router.get("/add", authMiddleware, (req, res) => {
   // if (!req.cookies.token) {

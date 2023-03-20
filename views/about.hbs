@@ -8,7 +8,9 @@
           <img src="{{image}}" alt="" />
           <div class="card-body">
             <p class="card-text fw-bold">{{title}}</p>
-            <div class="d-flex justify-content-end align-items-center">
+            <div class="d-flex justify-content-between align-items-center">
+              <small class="text-muted fs-6 text-end">{{formatDate createdAt}}</small>
+              {{!-- birinchis function nomi 2-unga parametr sifatida mongoosedagi malumot --}}
 
               <small class="text-muted fs-5 text-end">{{price}} $</small>
             

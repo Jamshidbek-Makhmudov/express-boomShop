@@ -98,6 +98,7 @@ router.post("/register", async (req, res) => {
     firstName: firstname,
     lastName: lastname,
     email: email,
+
     password: hashedPassword,
   }
   const user = await User.create(userData)
